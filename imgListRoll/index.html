@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja" class="noJS">
+<head>
+<meta charset="utf-8">
+<meta name="Description" content="">
+<meta name="Keywords" content="">
+<title>画像のリストを重ねてロールオーバーするとめくっていくスクリプト</title>
+<script src="../files/js/jquery-2.1.1.min.js"></script>
+<!--script src="../files/js/jquery-1.11.1.js"></script-->
+<script>
+$(window).load(function(){
+		//変数
+		var ul = $("div.box .imgList");
+		var flag = 1; // フラグ
+		var timer; // タイマー
+
+		//初期化
+		ul.find("li").each(function(){
+				var t = Math.floor(Math.random()*40) -20;
+				var l = Math.floor(Math.random()*40) -20;
+				$(this).css({top:t+"px",left:l+"px"});
+		});
+
+		//hoverで実行
+		ul.hover(function(){
+			if(flag === 1){ // flagが1なら
+				var self = $(this); // 対象のulを変数に格納
+				changeImg(1, self);
+			}
+		},
+		function(){
+			changeImg(0);
+		});
+		
+		//タイマー処理
+		function changeImg(i, self){
+			if(i === 1){
+				flag = 0; // flagを 0 にする
+				timer = setInterval(function(){
+						var tempLi = self.find("li:last-child");
+						self.prepend(tempLi);
+				}, 500);
+			}
+			else if(i === 0){
+				clearInterval(timer); // タイマー解除
+				flag = 1; // flagを 1 に戻す
+			}
+		};
+		
+});
+</script>
+<style type="text/css">
+.box {
+	position: relative;
+	width: 320px;
+	margin: 0 10px 80px 70px;
+	float: left;
+	text-align: center;
+}
+.box .imgLink {
+	display: block;
+	position: relative;
+	z-index: 444;
+	width: 320px;
+	height: 320px;
+}
+.box .imgList li {
+	position: absolute;
+	max-height: 320px;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	font-size: 0;
+}
+.box .imgList img {
+	max-width: 320px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<ul class="imgList">
+		<li><img src="http://upload.wikimedia.org/wikipedia/commons/a/af/Keisuke_Honda_Russian_Super_Cup_2013.jpg" class="attachment-thumbnail" alt="" /></li>
+		<li><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Keisuke_Honda_Eredivisie_3.jpg/500px-Keisuke_Honda_Eredivisie_3.jpg" alt="" /></li>
+		<li><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Keisuke_Honda_CSKA.jpg/440px-Keisuke_Honda_CSKA.jpg" alt="" /></li>
+		<li><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Keisuke_Honda_Eredivisie_2.jpg/400px-Keisuke_Honda_Eredivisie_2.jpg" alt="" /></li>
+		<li><img src="http://upload.wikimedia.org/wikipedia/commons/9/99/HondaVVV.JPG" alt="" /></li>
+	</ul>
+</div>
+
+</body>
+</html>
