@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja" class="noJS">
-
 <head>
-
 <meta charset="utf-8">
 <meta name="Description" content="">
 <meta name="Keywords" content="">
-
-
 <title>プルダウンと＃でフォーム出し分け</title>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+<script src="../files/js/jquery-2.1.1.min.js"></script>
 <script>
-
 //プルダウンと＃でフォーム出し分け
 $(function(){
 	var formList = $('#formList li.formBox'),
@@ -36,25 +29,7 @@ $(function(){
 		return getValue($(this));
 	}).change();
 });
-
-// カタログダウンロードIDを申請する
-$(function(){
-	var cBox = $("#catalogCheckbox");
-
-	$("#selectCatalog").change(function(){
-	    if($("#selectCatalog").val() == "太陽電池製造装置・検査装置"){
-	        cBox.css("display","block");
-	    } else if ($("#selectCatalog").val() == "真空包装機"){
-	        cBox.css("display","block");
-	    } else {
-	        cBox.css("display","none");
-	    }
-	});
-});
-
 </script>
-
-
 </head>
 <body>
 
